@@ -43,7 +43,7 @@ class AlertCashStorageController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Statistik Data Alert Cash Storage',
+            'message' => 'Statistik Data',
             'data' => [
                 'late' => $late,
                 'unlate' => $unlate,
