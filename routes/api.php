@@ -62,3 +62,22 @@ Route::get('/chartreplenishment', [\App\Http\Controllers\Api\ReplanishmentContro
 Route::get('/dashinbound', [\App\Http\Controllers\Api\DashInboundController::class, 'index']);
 
 Route::get('/dashboardstore', [\App\Http\Controllers\Api\DashboardStoreController::class, 'index']);
+
+##itrin
+Route::get('/itrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'index']);
+Route::get('/lateitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'late']);
+Route::get('/ontimeitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'onTime']);
+Route::get('/statisticitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'getStatistic']);
+
+##crossdock
+Route::get('/crossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'index']);
+Route::get('/statisticcrossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'getStatistic']);
+
+##Po
+Route::get('/po' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'index']);
+Route::get('/statisticpo' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'getStatistic']);
+
+##return
+Route::get('/return', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'index']);
+Route::get('/statisticreturn', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'getStatistic']);
+
