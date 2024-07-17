@@ -14,6 +14,11 @@ class SalesOrder extends Model
     protected $table = 'LOCATION_INVENTORY';
 
     public static function getSalesOrder(){
+
+         // Mengaktifkan ANSI_NULLS dan ANSI_WARNINGS
+         DB::connection('DB_ILS')->statement('SET ANSI_NULLS ON');
+         DB::connection('DB_ILS')->statement('SET ANSI_WARNINGS ON');
+
         $result = DB::connection ('DB_ILS')->select('EXEC DashboardV2_SALES_ORDER');
         $collection = collect($result);
         //->sortByDesc('TYPE'); 

@@ -14,6 +14,10 @@ class ItrOut extends Model
     protected $table = 'LOCATION_INVENTORY';
 
     public static function getItrOut(){
+         // Mengaktifkan ANSI_NULLS dan ANSI_WARNINGS
+         DB::connection('DB_ILS')->statement('SET ANSI_NULLS ON');
+         DB::connection('DB_ILS')->statement('SET ANSI_WARNINGS ON');
+
         $result = DB::connection ('DB_ILS')->select('EXEC DashboardV2_ITR_OUT');
         $collection = collect($result);
         //->sortByDesc('TYPE'); 

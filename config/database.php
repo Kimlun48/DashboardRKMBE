@@ -167,8 +167,8 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
             
-        'ansi_nulls' => true,
-        'ansi_warnings' => true,
+        // 'ansi_nulls' => true,
+        // 'ansi_warnings' => true,
     
         ],
 

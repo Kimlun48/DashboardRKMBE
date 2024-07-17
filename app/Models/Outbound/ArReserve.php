@@ -14,6 +14,11 @@ class ArReserve extends Model
     protected $table = 'LOCATION_INVENTORY';
 
     public static function getArReserve(){
+
+         // Mengaktifkan ANSI_NULLS dan ANSI_WARNINGS
+         DB::connection('DB_ILS')->statement('SET ANSI_NULLS ON');
+         DB::connection('DB_ILS')->statement('SET ANSI_WARNINGS ON');
+
         $result = DB::connection ('DB_ILS')->select('EXEC DashboardV2_AR_Reserve');
         $collection = collect($result);
         //->sortByDesc('TYPE'); 
