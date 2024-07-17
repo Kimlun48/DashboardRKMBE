@@ -21,8 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // //posts
 
-// Route::get('/wms', [App\Http\Controllers\Api\WmsController::class, 'index']);
-// Route::get('/integration', [App\Http\Controllers\Api\IntegrationController::class, 'index']);
+
 //ils
 Route::get('/ils', [\App\Http\Controllers\Api\IlsController::class, 'index']);
 Route::get('/ilssp', [\App\Http\Controllers\Api\IlsController::class, 'getIlsPs']);
@@ -63,21 +62,44 @@ Route::get('/dashinbound', [\App\Http\Controllers\Api\DashInboundController::cla
 
 Route::get('/dashboardstore', [\App\Http\Controllers\Api\DashboardStoreController::class, 'index']);
 
+##inbound
 ##itrin
-Route::get('/itrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'index']);
-Route::get('/lateitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'late']);
-Route::get('/ontimeitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'onTime']);
-Route::get('/statisticitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'getStatistic']);
-
+Route::get('/v2itrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'index']);
+Route::get('/v2lateitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'late']);
+Route::get('/v2ontimeitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'onTime']);
+Route::get('/v2statisticitrin', [\App\Http\Controllers\Api\Inbound\ItrInController::class, 'getStatistic']);
 ##crossdock
-Route::get('/crossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'index']);
-Route::get('/statisticcrossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'getStatistic']);
-
+Route::get('/v2crossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'index']);
+Route::get('/v2statisticcrossdock', [\App\Http\Controllers\Api\Inbound\CrossdockController::class, 'getStatistic']);
 ##Po
-Route::get('/po' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'index']);
-Route::get('/statisticpo' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'getStatistic']);
-
+Route::get('/v2po' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'index']);
+Route::get('/v2statisticpo' ,[\App\Http\Controllers\Api\Inbound\PoController::class, 'getStatistic']);
 ##return
-Route::get('/return', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'index']);
-Route::get('/statisticreturn', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'getStatistic']);
+Route::get('/v2return', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'index']);
+Route::get('/v2statisticreturn', [\App\Http\Controllers\Api\Inbound\ReceiptReturnController::class, 'getStatistic']);
+
+##storage
+##cashpicking
+Route::get('/v2cashpicking', [\App\Http\Controllers\Api\Storage\CashPickingController::class, 'index']);
+Route::get('/v2statisticcashpicking', [\App\Http\Controllers\Api\Storage\CashPickingController::class, 'getStatistic']);
+##deliverypicking
+Route::get('/v2deliverypicking', [\App\Http\Controllers\Api\Storage\DeliveryPickingContoller::class, 'index']);
+Route::get('/v2statisticdeliverypicking', [\App\Http\Controllers\Api\Storage\DeliveryPickingContoller::class, 'getStatistic']);
+##putaway
+Route::get('/v2putaway', [\App\Http\Controllers\Api\Storage\PutawayContoller::class, 'index']);
+Route::get('/v2statisticputaway', [\App\Http\Controllers\Api\Storage\PutawayContoller::class, 'getStatistic']);
+##replenishment
+Route::get('/v2replenishment', [\App\Http\Controllers\Api\Storage\ReplenishmentContoller::class, 'index']);
+Route::get('/v2statisticreplenishment', [\App\Http\Controllers\Api\Storage\ReplenishmentContoller::class, 'getStatistic']);
+
+##outbound
+#arreserve
+Route::get('/v2arreserve', [\App\Http\Controllers\Api\Outbound\ArReserveController::class, 'index']);
+Route::get('/v2statisticarreserve', [\App\Http\Controllers\Api\Outbound\ArReserveController::class, 'getStatistic']);
+##itrout
+Route::get('/v2itrout', [\App\Http\Controllers\Api\Outbound\ItrOutController::class, 'index']);
+Route::get('/v2statisticitrout', [\App\Http\Controllers\Api\Outbound\ItrOutController::class, 'getStatistic']);
+##salesorder
+Route::get('/v2salesorder', [\App\Http\Controllers\Api\Outbound\SalesOrderController::class, 'index']);
+Route::get('/v2statisticsalesorder', [\App\Http\Controllers\Api\Outbound\SalesOrderController::class, 'getStatistic']);
 

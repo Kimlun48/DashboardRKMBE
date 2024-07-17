@@ -39,7 +39,7 @@ class ItrInController extends Controller
     {
         $late = $this->data->where('Deadline', '>', 0)->count();
         $ontime = $this->data->where('Deadline', '=', 0)->count();
-        $total = $late + $ontime;
+        $total_all = $late + $ontime;
 
         $totalQTYLate = $this->data->where('Deadline', '>', 0)->sum('open_qty');
         $totalQTYOntime = $this->data->where('Deadline', '=', 0)->sum('open_qty');
@@ -61,7 +61,9 @@ class ItrInController extends Controller
         $totalDocOntime = $this->data
         ->where('Deadline', '=', 0)  // Filter data dengan Deadline > 0
         ->groupBy('receipt_id')      // Kelompokkan berdasarkan receipt_id
-        ->count();     
+        ->count();  
+         
+        $total = $totalDoclate + $totalDocOntime;
     
     // dd($totalDoclate);
 

@@ -35,4 +35,4 @@ Route::get('/test-mssql', function () {
     }
 });
 //Route::get('/integration' [])
-Route::get('/integration',[App\Http\Controllers\IntegrationController::class, 'index']);
+//Route::get('/integration',[App\Http\Controllers\IntegrationController::class, 'index']);

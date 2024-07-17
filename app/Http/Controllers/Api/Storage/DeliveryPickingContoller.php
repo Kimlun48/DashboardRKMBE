@@ -1,36 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Api\Inbound;
+namespace App\Http\Controllers\Api\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Inbound\ReturnInbound;
-use App\Http\Resources\Inbound\ReturnResource;
+use App\Models\Storage\DeliveryPicking;
+use App\Http\Resources\Storage\DeliveryPickingResource;
 
-class ReceiptReturnController extends Controller
+
+class DeliveryPickingContoller extends Controller
 {
     protected $data;
-
     public function __construct()
     {
-        $this->data = ReturnInbound::getReturnInbound();
+        $this->data = DeliveryPicking::getDeliveryPicking();
     }
 
     public function index()
     {
-         return new ReturnResource(true, 'List Data Return', $this->data);
+        return new DeliveryPickingResource(true, 'List Data Delivery Picking', $this->data);
     }
 
     public function late()
     {
-        // $late = $this->data->where('Deadline', '>', 0);
-        // return new LateItrInResource(true, 'List Data ITRIN', $late);
+
     }
 
     public function onTime()
     {
-        // $ontime = $this->data->where('Deadline', '=', 0);
-        // return new OntimeItrInResource(true, 'List Data ITRIN', $ontime);
+
     }
 
     public function getStatistic()
@@ -39,18 +37,18 @@ class ReceiptReturnController extends Controller
         $ontime = $this->data->where('late', '=', 0)->count();
         $total_all = $late + $ontime;
 
-        $totalQTYLate = $this->data->where('late', '>', 0)->sum('open_qty');
-        $totalQTYOntime = $this->data->where('late', '=', 0)->sum('open_qty');
+        $totalQTYLate = $this->data->where('late', '>', 0)->sum('Total_QTY');
+        $totalQTYOntime = $this->data->where('late', '=', 0)->sum('Total_QTY');
 
         $totalDoclate = $this->data
         ->where('late', '>', 0)  // Filter data dengan Deadline > 0
-        ->groupBy('receipt_id')      // Kelompokkan berdasarkan receipt_id
+        ->groupBy('DocNum')      // Kelompokkan berdasarkan receipt_id
         ->count();                   // Hitung jumlah distinct receipt_id
 
         $totalDocOntime = $this->data
         ->where('late', '=', 0)  // Filter data dengan Deadline > 0
-        ->groupBy('receipt_id')      // Kelompokkan berdasarkan receipt_id
-        ->count();
+        ->groupBy('DocNum')      // Kelompokkan berdasarkan receipt_id
+        ->count();  
         
         $total = $totalDoclate + $totalDocOntime;
     
@@ -58,7 +56,7 @@ class ReceiptReturnController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Statistik Data RETURN',
+            'message' => 'Statistik Data Delivery Picking',
             'data' => [
                 'late' => $late,
                 'ontime' => $ontime,
@@ -70,4 +68,5 @@ class ReceiptReturnController extends Controller
             ],
         ]);
     }
+    
 }

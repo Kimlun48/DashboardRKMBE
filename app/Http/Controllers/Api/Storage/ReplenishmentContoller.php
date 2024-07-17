@@ -1,64 +1,61 @@
 <?php
 
-namespace App\Http\Controllers\Api\Inbound;
+namespace App\Http\Controllers\Api\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Inbound\Crossdock;
-use App\Http\Resources\Inbound\IndexCrossdockResource;
+use App\Models\Storage\Replenishment;
+use App\Http\Resources\Storage\ReplenishmentResource;
 
-class CrossdockController extends Controller
+class ReplenishmentContoller extends Controller
 {
     protected $data;
-
     public function __construct()
     {
-        $this->data = Crossdock::getCrossdock();
+        $this->data = Replenishment::getReplenishment();
     }
 
     public function index()
     {
-         return new IndexCrossdockResource(true, 'List Data Crossdock', $this->data);
+        return new ReplenishmentResource(true, 'List data Replenishment', $this->data);
     }
 
     public function late()
     {
-        // $late = $this->data->where('Deadline', '>', 0);
-        // return new LateItrInResource(true, 'List Data ITRIN', $late);
+
     }
 
     public function onTime()
     {
-        // $ontime = $this->data->where('Deadline', '=', 0);
-        // return new OntimeItrInResource(true, 'List Data ITRIN', $ontime);
+
     }
 
-    public function getStatistic()
+    public function getStatistic ()
     {
         $late = $this->data->where('late', '>', 0)->count();
         $ontime = $this->data->where('late', '=', 0)->count();
         $total_all = $late + $ontime;
 
-        $totalQTYLate = $this->data->where('late', '>', 0)->sum('qty');
-        $totalQTYOntime = $this->data->where('late', '=', 0)->sum('qty');
+        $totalQTYLate = $this->data->where('late', '>', 0)->sum('QTY');
+        $totalQTYOntime = $this->data->where('late', '=', 0)->sum('QTY');
 
         $totalItemlate = $this->data
         ->where('late', '>', 0)  // Filter data dengan Deadline > 0
-        ->groupBy('ITEM_DESC')      // Kelompokkan berdasarkan receipt_id
+        ->groupBy('ITEM')      // Kelompokkan berdasarkan receipt_id
         ->count();                   // Hitung jumlah distinct receipt_id
 
         $totalItemOntime = $this->data
         ->where('late', '=', 0)  // Filter data dengan Deadline > 0
-        ->groupBy('ITEM_DESC')      // Kelompokkan berdasarkan receipt_id
-        ->count();  
-        
+        ->groupBy('ITEM')      // Kelompokkan berdasarkan receipt_id
+        ->count();     
+
         $total = $totalItemlate + $totalItemOntime;
     
     // dd($totalDoclate);
 
         return response()->json([
             'success' => true,
-            'message' => 'Statistik Data CROSSDOCK',
+            'message' => 'Statistik Data Replenishment',
             'data' => [
                 'late' => $late,
                 'ontime' => $ontime,
@@ -70,4 +67,6 @@ class CrossdockController extends Controller
             ],
         ]);
     }
+    
+    
 }
